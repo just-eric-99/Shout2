@@ -1,0 +1,20 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+        name: Build
+        runs-on: macOS-latest
+        steps:
+        - name: Select Xcode
+          run: xcversion select 12.2
+
+        - name: Check XCode Version
+          run: xcodebuild -version
+
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: macOS Native
+          run: swift build
